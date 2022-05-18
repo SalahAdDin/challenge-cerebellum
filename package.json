@@ -23,10 +23,12 @@
     "@nextui-org/react": "^1.0.0-beta.7",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-hook-form": "^7.31.1",
     "react-iconly": "^2.2.5",
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
+    "@hookform/devtools": "^4.1.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/user-event": "^14.2.0",
     "@types/jest": "^27.5.1",
