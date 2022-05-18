@@ -23,7 +23,11 @@
       "@presentation/*": ["presentation/*"]
     }
   },
-  "include": ["src", "jest.config.ts"],
+  "include": [
+    "src",
+    "jest.config.ts",
+    "vite.config.ts" //TypeScript will not automatically use project references to resolve files
+  ],
   "exclude": ["node_modules", "coverage"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
