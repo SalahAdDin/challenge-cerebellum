@@ -134,7 +134,7 @@ const Home: React.FC = () => {
                   name="toilet"
                   control={control}
                   options={plansOptions}
-                  label="Toilet"
+                  label="Select your Toilet"
                 />
               </Col>
               <Col span={3}>
@@ -142,7 +142,7 @@ const Home: React.FC = () => {
                   name="sink"
                   control={control}
                   options={plansOptions}
-                  label="Sink"
+                  label="Select your Sink"
                 />
               </Col>
               <Col span={3}>
@@ -150,7 +150,7 @@ const Home: React.FC = () => {
                   name="bathtub"
                   control={control}
                   options={plansOptions}
-                  label="Bathtub"
+                  label="Select your Bathtub"
                 />
               </Col>
             </>
