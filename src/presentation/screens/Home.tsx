@@ -79,7 +79,7 @@ const Home: React.FC = () => {
   return (
     <form onSubmit={onPromise(onSubmit)} onReset={onReset}>
       <Card.Body as="main" css={{ textAlign: 'center' }}>
-        <Row gap={2}>
+        <Row>
           <Col span={4}>
             <RadioGroup
               name="hasBudget"
@@ -109,7 +109,8 @@ const Home: React.FC = () => {
             </Col>
           )}
         </Row>
-        <Row gap={1}>
+        <Spacer y={1} />
+        <Row>
           <Col span={3}>
             <RadioGroup
               name="sanitary"
@@ -148,7 +149,8 @@ const Home: React.FC = () => {
             </>
           )}
         </Row>
-        <Row gap={1}>
+        <Spacer y={1} />
+        <Row>
           <Col span={3}>
             <RadioGroup
               name="floorTiling"

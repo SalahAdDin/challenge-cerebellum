@@ -1,4 +1,9 @@
-import { Col, Radio, Text } from '@nextui-org/react';
+import {
+  Radio,
+  StyledCheckboxContainer,
+  StyledCheckboxText,
+  Text,
+} from '@nextui-org/react';
 import { RadioProps } from '@nextui-org/react/types/radio/radio';
 import { Controller, FieldValues, UseControllerProps } from 'react-hook-form';
 
@@ -30,14 +35,14 @@ const RadioGroup = <T extends FieldValues>({
     name={name}
     control={control}
     render={({ field, fieldState: { error } }) => (
-      <Col>
-        <Text
+      <StyledCheckboxContainer>
+        <StyledCheckboxText
           color={error ? 'error' : 'default'}
           as="label"
-          css={{ fontSize: 14 }}
+          css={{ fontSize: 14, justifyContent: 'flex-start', mb: 12 }}
         >
           {label}
-        </Text>
+        </StyledCheckboxText>
         <Radio.Group
           {...groupProps}
           textColor={error ? 'error' : 'default'}
@@ -69,7 +74,7 @@ const RadioGroup = <T extends FieldValues>({
             {error.message}
           </Text>
         )}
-      </Col>
+      </StyledCheckboxContainer>
     )}
   />
   // eslint-disable-next-line @typescript-eslint/indent
