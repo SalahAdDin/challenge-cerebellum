@@ -3,10 +3,10 @@ import { Container } from '@nextui-org/react';
 import Home from '@presentation/screens/Home';
 import Layout from '@presentation/widgets/Layout';
 import LoadingWidget from '@presentation/widgets/LoadingWidget';
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-// const Results = React.lazy(() => import('./screens/Results'));
+const Results = lazy(() => import('@presentation/screens/Results'));
 
 const App = () => (
   <Container
@@ -24,7 +24,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="/result" />
+              <Route path="/result" element={<Results />} />
             </Route>
           </Routes>
         </Router>
