@@ -1,92 +1,49 @@
-![The G2i Logo](https://raw.githubusercontent.com/g2i/code-challenge-static-assets/master/g2i-web-150px.png "The G2i logo")
+# Assignment
 
-# Trivia Game Coding Challenge
+Build a simple Frontend (using React or any JavaScript technology of your choice) for a “Home
+Renovation” calculator tool, that will:
 
-## Overview
+1. Allow the users to choose from various parameters.
+2. Display a final result page of the estimated cost.
+3. Feel free to get as creative as you want and use any design templates or libraries you think
+    are neccessary.
 
-Your challenge is to create a 10 question, true or false, trivia app in React Web. **You should not just implement the most basic solution. This is a chance to show off your abilities and impress.**
+## Parameters for project
 
-**The application code will be reviewed and scored on these key areas with many subset areas for each:**
+Below are the parameters for the project. Please use it for the logic flow and final output for the user.
 
-- Functionality
-- Code Format
-- Project Structure
-- Scalability
-- Maintainability
-- Use of industry best practices
+Questions
 
-Some specific things that we are looking for:
+  a) Do you have a budget? (Yes/No, with a comment box if Yes)
+  b) Are you changing sanitary products? (Yes/No, if yes show the subsequent 3 questions. If No move to question f)
+  c) Select your toilet (3 choices)
+  d) Select your sink (3 choices)
+  e) Select your bathtub (3 choices)
+  f) Are you changing your floor tiling? (Yes/No, if yes show the next subsequent question. If No move to the resulting budget)
+  g) Do you prefer ceramic or marble floor tiling? (If user chooses ceramic, show question h. If user chooses marble, show question i)
+  h) Choose your ceramic (3 choices, prices are per m2)
+  i) Choose your marble flooring (3 choices, prices are per m2)
+  j) what is the size of your bathroom? (3 choices)
 
-- State manager
-- Navigation solution
-- Componentization
-- Communiation in the repo and/or code
-- Best practices with API calls and data
-- Separation of concerns between business and UI logic
+## Result / Lookup Table
 
-## Goals
+Show the resulting budgeting, which adds the user's choices from questions c/d/e plus the user's
+choice from question h/i multiplied by the relevant coefficient from user's choice in question j. Show the budget number in green if the value is **lower** thanthe number inputed by the user in question a. Show the budget number in red if it is **higher** thanthe number inputed by the user in question a. Show it in black if it is equal, or if the user answered 'No' to question a.
 
-Implement the screens based off the wireframes, HTML/CSS starter code and api below using **advanced techniques** and **industry best practices** for your platform. Use your best judgment for UI/UX implementation. We have provided boilerplate code for a standard CRA project with Redux. In addition, we have given you some starter HTML and CSS in the designs folder. You can reference those as a starting place for your layout. We want to see how you structure the rest of the project and what tooling you use from here.
+|  |Economy | Standard | Premium |
+|--|--------|----------|---------|
+|Sanitary products (combination)|||
+|Toilet (USD) | 200 | 1000 | 3000 |
+|Sink (USD) | 350 | 700 | 1500 |
+|Bathtub (USD) | 800 | 1500 | 4650 |
+|Floor tiling (choice) |||
+|Ceramic (USD per m2) | 15 | 35 | 75|
+|Marble (USD per m2) | 50 | 95 | 150 |
 
-## Specifications
 
-Layout:
-
-See the designs folder for basic HTML and CSS already provided
-
-Data:
-
-The api url is: https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean
-
-Sample returned json:
-
-```javascript
-{
-  "response_code": 0,
-  "results": [
-    {
-      "category": "Entertainment: Video Games",
-      "type": "boolean",
-      "difficulty": "hard",
-      "question": "Unturned originally started as a Roblox game.",
-      "correct_answer": "True",
-      "incorrect_answers": [
-        "False"
-      ]
-    },…]}
-```
-
-### Intro / Home Screen:
-
-![The Intro screen for the app](https://raw.githubusercontent.com/g2i/code-challenge-static-assets/master/Intro.png "The intro screen for the app")
-
-- Static Text
-- BEGIN button navigates to the Quiz screen and starts the Quiz
-
-### Quiz Screen:
-
-![The Quiz screen for the app](https://raw.githubusercontent.com/g2i/code-challenge-static-assets/master/Quiz.png "The quiz screen for the app")
-
-- The headline is from question category
-- The card element contains the current question
-- The next question should appear after the current question is answered True or False
-- After all questions have been answered, navigate to the Results Screen
-
-### Results screen:
-
-![The Results screen for the app](https://raw.githubusercontent.com/g2i/code-challenge-static-assets/master/Score.png "The score screen for the app")
-
-- The Score shows correct and total
-- Displays a list of the questions and whether the answer was correct or not
-- PLAY AGAIN starts over and navigates to the Home Screen
-
----
-
-© 2018 G2i Inc. All rights reserved. Certain information contained herein is derived from information which is protected by copyrights held by G2i Inc. This code challenge, including any parts of it, cannot be duplicated, distributed, copied, modified, used to make a derivative work or used in any way without the prior written consent of G2i Inc.
-
----
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+|Bathroom size | Small | Medium | Large |
+|--|--------|----------|---------|
+|Co-efficient to multiply floor tiling price selected by user (numbers are hidden to the users) | 9 | 12 | 16 |
 
 ## Available Scripts
 
