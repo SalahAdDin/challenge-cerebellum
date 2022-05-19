@@ -1,4 +1,9 @@
-import { calculateBudget, onPromise } from '@application/utils';
+import AppContext from '@application/context';
+import {
+  calculateRecipeList,
+  defaultRecipe,
+  onPromise,
+} from '@application/utils';
 import { Recipe } from '@domain/form.dto';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Card, Col, Row, Spacer } from '@nextui-org/react';
@@ -7,8 +12,9 @@ import RadioGroup, {
   RadioOption,
 } from '@presentation/widgets/forms/inputs/RadioGroup';
 import schema from '@presentation/widgets/forms/validation.schema';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 const boolOptions: RadioOption[] = [
   {
@@ -44,17 +50,11 @@ const sizeOptions: RadioOption[] = [
   { label: 'Large', value: 'large' },
 ];
 
-const defaultValues: Recipe = {
-  hasBudget: false,
-  budget: 0,
-  sanitary: false,
-  floorTiling: false,
-  size: 'small',
-};
-
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+  const { setResult } = useContext(AppContext);
   const form = useForm<Recipe>({
-    defaultValues,
+    defaultValues: defaultRecipe,
     resolver: yupResolver(schema),
   });
 
@@ -62,13 +62,21 @@ const Home: React.FC = () => {
   const { hasBudget, sanitary, floorTiling, tilingType } = watch();
 
   const onSubmit = handleSubmit((data) => {
-    console.log('Data: ', data);
+    const recipe = calculateRecipeList(data);
+    const price = recipe.reduce((acc, item) => acc + +item.price, 0);
 
-    const calculatedPrice = calculateBudget(data);
-
-    console.log(calculatedPrice);
+    setResult({
+      hasBudget: data.hasBudget,
+      budget: data.budget,
+      recipe,
+      price,
+    });
 
     reset();
+
+    navigate('result', {
+      state: { title: 'Calculation Results' },
+    });
   });
 
   const onReset = () => {
