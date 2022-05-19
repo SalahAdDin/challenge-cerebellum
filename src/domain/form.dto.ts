@@ -4,6 +4,8 @@ type Size = 'small' | 'medium' | 'large';
 
 type Plan = 'economy' | 'standard' | 'premium';
 
+type TilingType = 'ceramic' | 'marble';
+
 type PlanCost = {
   [key in Plan]: number;
 };
@@ -24,6 +26,7 @@ interface Recipe {
   sink?: Plan;
   bathtub?: Plan;
   floorTiling: boolean;
+  tilingType?: TilingType;
   ceramic?: Plan;
   marble?: Plan;
   size: Size;
