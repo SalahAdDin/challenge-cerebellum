@@ -1,6 +1,5 @@
 import { calculateBudget, onPromise } from '@application/utils';
 import { Recipe } from '@domain/form.dto';
-import { DevTool } from '@hookform/devtools';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Card, Col, Row, Spacer } from '@nextui-org/react';
 import Input from '@presentation/widgets/forms/inputs/Input';
@@ -211,7 +210,7 @@ const Home: React.FC = () => {
           Calculate
         </Button>
       </Card.Footer>
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </form>
   );
 };

@@ -20,12 +20,14 @@
     "*.+(json|css)": "prettier --write"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.8.10",
     "@nextui-org/react": "^1.0.0-beta.7",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.31.1",
     "react-iconly": "^2.2.5",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@hookform/devtools": "^4.1.0",
