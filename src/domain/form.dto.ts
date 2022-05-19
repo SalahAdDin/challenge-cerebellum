@@ -18,6 +18,12 @@ type FeatureSize = {
   [key in Size]: number;
 };
 
+type RecipeItem = {
+  feature: Feature;
+  plan: Plan;
+  price: number;
+};
+
 interface Recipe {
   hasBudget: boolean;
   budget?: number;
@@ -32,4 +38,19 @@ interface Recipe {
   size: Size;
 }
 
-export type { Feature, FeaturePlan, FeatureSize, Plan, Recipe };
+interface Result {
+  hasBudget: boolean;
+  budget: number;
+  recipe: RecipeItem[];
+  price: number;
+}
+
+export type {
+  Feature,
+  FeaturePlan,
+  FeatureSize,
+  Plan,
+  Recipe,
+  Result,
+  RecipeItem,
+};

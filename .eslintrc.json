@@ -21,7 +21,7 @@
     "object-curly-newline": [
       "error",
       {
-        "ExportDeclaration": { "multiline": true, "minProperties": 6 }
+        "ExportDeclaration": { "multiline": true, "minProperties": 4 }
       }
     ],
     "operator-linebreak": "warn",
@@ -33,7 +33,7 @@
         "unnamedComponents": "arrow-function"
       }
     ],
-    "react/jsx-one-expression-per-line": [1, { "allow": "literal" }],
+    "react/jsx-one-expression-per-line": [1, { "allow": "single-child" }],
     "react/jsx-props-no-spreading": "off",
     "react/jsx-wrap-multilines": "warn",
     "react/require-default-props": "off",

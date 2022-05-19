@@ -1,3 +1,4 @@
+import AppProvider from '@application/provider';
 import { Container } from '@nextui-org/react';
 import Home from '@presentation/screens/Home';
 import Layout from '@presentation/widgets/Layout';
@@ -18,14 +19,16 @@ const App = () => (
     gap={20}
   >
     <Suspense fallback={<LoadingWidget />}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="/result" />
-          </Route>
-        </Routes>
-      </Router>
+      <AppProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="/result" />
+            </Route>
+          </Routes>
+        </Router>
+      </AppProvider>
     </Suspense>
   </Container>
 );

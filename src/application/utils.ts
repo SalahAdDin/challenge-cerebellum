@@ -4,8 +4,17 @@ import {
   FeatureSize,
   Plan,
   Recipe,
+  RecipeItem,
 } from '@domain/form.dto';
 import { SyntheticEvent } from 'react';
+
+const defaultRecipe: Recipe = {
+  hasBudget: false,
+  budget: 0,
+  sanitary: false,
+  floorTiling: false,
+  size: 'small',
+};
 
 const plans: FeaturePlan = {
   toilet: {
@@ -41,24 +50,36 @@ const sizeCost: FeatureSize = {
   large: 16,
 };
 
-const calculateBudget = (values: Recipe): number => {
+const calculateRecipeList = (values: Recipe): RecipeItem[] => {
   const { size, ...other } = values;
 
-  const result = Object.entries(other).reduce((acc, item) => {
+  const result = Object.entries(other).reduce<RecipeItem[]>((acc, item) => {
     const [key, value] = item as [Feature, Plan];
+
+    if (value === undefined) return acc;
 
     switch (key) {
       case 'bathtub':
       case 'toilet':
       case 'sink':
-        return acc + plans[key][value];
+        return [
+          ...acc,
+          { feature: key, plan: value, price: plans[key][value] },
+        ];
       case 'ceramic':
       case 'marble':
-        return acc + plans[key][value] * sizeCost[size];
+        return [
+          ...acc,
+          {
+            feature: key,
+            plan: value,
+            price: plans[key][value] * sizeCost[size],
+          },
+        ];
       default:
         return acc;
     }
-  }, 0);
+  }, []);
 
   return result;
 };
@@ -73,4 +94,4 @@ function onPromise<T>(promise: (event: SyntheticEvent) => Promise<T>) {
   };
 }
 
-export { calculateBudget, onPromise };
+export { calculateRecipeList, onPromise, defaultRecipe };
