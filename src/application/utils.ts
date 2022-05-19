@@ -5,6 +5,7 @@ import {
   Plan,
   Recipe,
 } from '@domain/form.dto';
+import { SyntheticEvent } from 'react';
 
 const plans: FeaturePlan = {
   toilet: {
@@ -62,4 +63,14 @@ const calculateBudget = (values: Recipe): number => {
   return result;
 };
 
-export default calculateBudget;
+function onPromise<T>(promise: (event: SyntheticEvent) => Promise<T>) {
+  return (event: SyntheticEvent) => {
+    if (promise) {
+      promise(event).catch((error) => {
+        console.log('Unexpected error', error);
+      });
+    }
+  };
+}
+
+export { calculateBudget, onPromise };

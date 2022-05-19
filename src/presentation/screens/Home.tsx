@@ -1,4 +1,4 @@
-import { onPromise } from '@application/utils';
+import { calculateBudget, onPromise } from '@application/utils';
 import { Recipe } from '@domain/form.dto';
 import { DevTool } from '@hookform/devtools';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,11 +14,22 @@ import { useForm } from 'react-hook-form';
 const boolOptions: RadioOption[] = [
   {
     label: 'Yes',
-    value: 'true',
+    value: true,
   },
   {
     label: 'No',
-    value: 'false',
+    value: false,
+  },
+];
+
+const tilingOptions: RadioOption[] = [
+  {
+    label: 'Ceramic',
+    value: 'ceramic',
+  },
+  {
+    label: 'Marble',
+    value: 'marble',
   },
 ];
 
@@ -36,6 +47,7 @@ const sizeOptions: RadioOption[] = [
 
 const defaultValues: Recipe = {
   hasBudget: false,
+  budget: 0,
   sanitary: false,
   floorTiling: false,
   size: 'small',
@@ -48,10 +60,14 @@ const Home: React.FC = () => {
   });
 
   const { reset, handleSubmit, watch, control } = form;
-  const { hasBudget, sanitary, floorTiling } = watch();
+  const { hasBudget, sanitary, floorTiling, tilingType } = watch();
 
   const onSubmit = handleSubmit((data) => {
     console.log('Data: ', data);
+
+    const calculatedPrice = calculateBudget(data);
+
+    console.log(calculatedPrice);
 
     reset();
   });
@@ -59,21 +75,24 @@ const Home: React.FC = () => {
   const onReset = () => {
     reset();
   };
+
   return (
     <form onSubmit={onPromise(onSubmit)} onReset={onReset}>
       <Card.Body as="main" css={{ textAlign: 'center' }}>
         <Row gap={2}>
-          <Col>
+          <Col span={4}>
             <RadioGroup
               name="hasBudget"
               control={control}
               options={boolOptions}
               label="Do you have a budget?"
-              groupProps={{ row: true }}
+              groupProps={{
+                row: true,
+              }}
             />
           </Col>
           {hasBudget && (
-            <Col>
+            <Col span={4}>
               <Input
                 name="budget"
                 control={control}
@@ -91,7 +110,7 @@ const Home: React.FC = () => {
           )}
         </Row>
         <Row gap={1}>
-          <Col>
+          <Col span={3}>
             <RadioGroup
               name="sanitary"
               control={control}
@@ -102,7 +121,7 @@ const Home: React.FC = () => {
           </Col>
           {sanitary && (
             <>
-              <Col>
+              <Col span={3}>
                 <RadioGroup
                   name="toilet"
                   control={control}
@@ -110,7 +129,7 @@ const Home: React.FC = () => {
                   label="Toilet"
                 />
               </Col>
-              <Col>
+              <Col span={3}>
                 <RadioGroup
                   name="sink"
                   control={control}
@@ -118,7 +137,7 @@ const Home: React.FC = () => {
                   label="Sink"
                 />
               </Col>
-              <Col>
+              <Col span={3}>
                 <RadioGroup
                   name="bathtub"
                   control={control}
@@ -130,7 +149,7 @@ const Home: React.FC = () => {
           )}
         </Row>
         <Row gap={1}>
-          <Col>
+          <Col span={3}>
             <RadioGroup
               name="floorTiling"
               control={control}
@@ -141,25 +160,37 @@ const Home: React.FC = () => {
           </Col>
           {floorTiling && (
             <>
-              <Col>
+              <Col span={3}>
                 <RadioGroup
-                  name="ceramic"
+                  name="tilingType"
                   control={control}
-                  options={plansOptions}
-                  label="Ceramic"
+                  options={tilingOptions}
+                  label="Do you prefer ceramic or marble floor tiling?"
                 />
               </Col>
-              <Col>
-                <RadioGroup
-                  name="marble"
-                  control={control}
-                  options={plansOptions}
-                  label="Marble"
-                />
-              </Col>
+              {tilingType === 'ceramic' && (
+                <Col span={3}>
+                  <RadioGroup
+                    name="ceramic"
+                    control={control}
+                    options={plansOptions}
+                    label="Choose your Ceramic"
+                  />
+                </Col>
+              )}
+              {tilingType === 'marble' && (
+                <Col span={3}>
+                  <RadioGroup
+                    name="marble"
+                    control={control}
+                    options={plansOptions}
+                    label="Choose your Marble"
+                  />
+                </Col>
+              )}
             </>
           )}
-          <Col>
+          <Col span={3}>
             <RadioGroup
               name="size"
               control={control}
@@ -171,10 +202,10 @@ const Home: React.FC = () => {
       </Card.Body>
       <Spacer y={2} />
       <Card.Footer as="footer">
-        <Button type="reset" css={{ margin: 'auto' }}>
+        <Button type="reset" bordered css={{ margin: 'auto' }}>
           Clear
         </Button>
-        <Button type="submit" color="primary" css={{ margin: 'auto' }}>
+        <Button type="submit" css={{ margin: 'auto' }}>
           Calculate
         </Button>
       </Card.Footer>
